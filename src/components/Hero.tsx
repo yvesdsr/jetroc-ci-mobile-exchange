@@ -1,8 +1,12 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, ShoppingCart, Repeat } from "lucide-react";
+import { ArrowRight, ShoppingCart, Repeat, DollarSign } from "lucide-react";
 import heroImage from "@/assets/hero-phone.jpg";
+import SellModal from "./modals/SellModal";
 
 const Hero = () => {
+  const [isSellModalOpen, setIsSellModalOpen] = useState(false);
+  
   const scrollToProducts = () => {
     document.getElementById('produits')?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -49,6 +53,15 @@ const Hero = () => {
               <Repeat className="mr-2 h-5 w-5" />
               Faire un troc
             </Button>
+            <Button 
+              variant="outline" 
+              size="lg"
+              className="border-2 border-orange-ci text-orange-ci hover:bg-orange-ci hover:text-white transition-all duration-300"
+              onClick={() => setIsSellModalOpen(true)}
+            >
+              <DollarSign className="mr-2 h-5 w-5" />
+              Vendre mon téléphone
+            </Button>
           </div>
 
           {/* Stats */}
@@ -82,6 +95,11 @@ const Hero = () => {
           <div className="absolute -bottom-4 -left-4 w-72 h-72 bg-gradient-to-tr from-green-ci/20 to-orange-ci/20 rounded-full blur-3xl"></div>
         </div>
       </div>
+      
+      <SellModal 
+        isOpen={isSellModalOpen}
+        onClose={() => setIsSellModalOpen(false)}
+      />
     </section>
   );
 };

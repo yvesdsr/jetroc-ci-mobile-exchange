@@ -2,9 +2,11 @@ import { useState } from "react";
 import { Smartphone, Facebook, Instagram, Mail, Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import SellModal from "./modals/SellModal";
+import AdminModal from "./modals/AdminModal";
 
 const Footer = () => {
   const [isSellModalOpen, setIsSellModalOpen] = useState(false);
+  const [isAdminModalOpen, setIsAdminModalOpen] = useState(false);
 
   return (
     <>
@@ -70,7 +72,10 @@ const Footer = () => {
               </div>
               
               {/* Admin Access */}
-              <button className="text-muted-foreground hover:text-orange-ci transition-colors text-sm">
+              <button 
+                onClick={() => setIsAdminModalOpen(true)}
+                className="text-muted-foreground hover:text-orange-ci transition-colors text-sm"
+              >
                 <Lock className="h-3 w-3 inline mr-1" />
                 Admin
               </button>
@@ -86,6 +91,11 @@ const Footer = () => {
       <SellModal 
         isOpen={isSellModalOpen}
         onClose={() => setIsSellModalOpen(false)}
+      />
+      
+      <AdminModal 
+        isOpen={isAdminModalOpen}
+        onClose={() => setIsAdminModalOpen(false)}
       />
     </>
   );
