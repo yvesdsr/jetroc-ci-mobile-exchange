@@ -1,9 +1,12 @@
 import { useState } from "react";
-import { Menu, X, Smartphone } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Menu, X, Smartphone, User, Settings, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@/contexts/AuthContext";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user, isAdmin, signOut } = useAuth();
 
   const menuItems = [
     { name: "Accueil", href: "#accueil" },
@@ -29,17 +32,46 @@ const Header = () => {
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
-            {menuItems.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                className="text-foreground hover:text-orange-ci transition-colors duration-300 font-medium"
-              >
-                {item.name}
-              </a>
-            ))}
-          </nav>
+          <div className="hidden md:flex items-center space-x-8">
+            <nav className="flex items-center space-x-8">
+              {menuItems.map((item) => (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  className="text-foreground hover:text-orange-ci transition-colors duration-300 font-medium"
+                >
+                  {item.name}
+                </a>
+              ))}
+            </nav>
+
+            {/* Auth Buttons */}
+            <div className="flex items-center space-x-2">
+              {user ? (
+                <>
+                  {isAdmin && (
+                    <Button asChild variant="outline">
+                      <Link to="/admin">
+                        <Settings className="mr-2 h-4 w-4" />
+                        Admin
+                      </Link>
+                    </Button>
+                  )}
+                  <Button onClick={signOut} variant="ghost">
+                    <LogOut className="mr-2 h-4 w-4" />
+                    Déconnexion
+                  </Button>
+                </>
+              ) : (
+                <Button asChild>
+                  <Link to="/auth">
+                    <User className="mr-2 h-4 w-4" />
+                    Connexion
+                  </Link>
+                </Button>
+              )}
+            </div>
+          </div>
 
           {/* Mobile menu button */}
           <Button

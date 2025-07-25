@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Filter, Search, SlidersHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
+import { supabase } from "@/integrations/supabase/client";
 import ProductCard from "./ProductCard";
 
 // Mock data - sera remplacé par l'API Supabase
@@ -74,9 +75,47 @@ const ProductGrid = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [sortBy, setSortBy] = useState("newest");
-  const [products] = useState(mockProducts);
+  const [products, setProducts] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const categories = ["all", "iPhone", "Android", "Ordinateurs", "Autres"];
+  const categories = ["all", "Smartphones", "Ordinateurs", "Tablettes", "Accessoires"];
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  const fetchProducts = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('products')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        console.error('Error fetching products:', error);
+        // Fallback to mock data if database fetch fails
+        setProducts(mockProducts);
+      } else {
+        // Transform database products to match expected format
+        const transformedProducts = data.map(product => ({
+          id: product.id,
+          name: product.name,
+          description: product.description,
+          price: product.price,
+          image: product.image_url,
+          category: product.category,
+          condition: product.condition,
+          rating: product.rating
+        }));
+        setProducts(transformedProducts);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      setProducts(mockProducts);
+    } finally {
+      setLoading(false);
+    }
+  };
   
   const filteredProducts = products.filter(product => {
     const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -186,7 +225,12 @@ const ProductGrid = () => {
         </div>
 
         {/* Products Grid */}
-        {sortedProducts.length > 0 ? (
+        {loading ? (
+          <div className="text-center py-16">
+            <div className="text-2xl mb-4">⏳</div>
+            <p className="text-muted-foreground">Chargement des produits...</p>
+          </div>
+        ) : sortedProducts.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {sortedProducts.map((product) => (
               <ProductCard key={product.id} {...product} />
