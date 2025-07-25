@@ -34,29 +34,31 @@ const Hero = () => {
           </div>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-            <Button 
-              size="lg" 
-              className="bg-gradient-to-r from-orange-ci to-orange-light hover:from-orange-light hover:to-orange-ci transition-all duration-300 shadow-lg hover:shadow-xl"
-              onClick={scrollToProducts}
-            >
-              <ShoppingCart className="mr-2 h-5 w-5" />
-              Découvrir nos téléphones
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
+          <div className="flex flex-col gap-4 justify-center lg:justify-start">
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Button 
+                size="lg" 
+                className="bg-gradient-to-r from-orange-ci to-orange-light hover:from-orange-light hover:to-orange-ci transition-all duration-300 shadow-lg hover:shadow-xl"
+                onClick={scrollToProducts}
+              >
+                <ShoppingCart className="mr-2 h-5 w-5" />
+                Découvrir nos téléphones
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+              <Button 
+                variant="outline" 
+                size="lg"
+                className="border-2 border-green-ci text-green-ci hover:bg-green-ci hover:text-white transition-all duration-300"
+                onClick={scrollToProducts}
+              >
+                <Repeat className="mr-2 h-5 w-5" />
+                Faire un troc
+              </Button>
+            </div>
             <Button 
               variant="outline" 
               size="lg"
-              className="border-2 border-green-ci text-green-ci hover:bg-green-ci hover:text-white transition-all duration-300"
-              onClick={scrollToProducts}
-            >
-              <Repeat className="mr-2 h-5 w-5" />
-              Faire un troc
-            </Button>
-            <Button 
-              variant="outline" 
-              size="lg"
-              className="border-2 border-orange-ci text-orange-ci hover:bg-orange-ci hover:text-white transition-all duration-300"
+              className="border-2 border-orange-ci text-orange-ci hover:bg-orange-ci hover:text-white transition-all duration-300 w-fit mx-auto lg:mx-0"
               onClick={() => setIsSellModalOpen(true)}
             >
               <DollarSign className="mr-2 h-5 w-5" />
