@@ -9,12 +9,12 @@ const Header = () => {
   const { user, isAdmin, signOut } = useAuth();
 
   const menuItems = [
-    { name: "Accueil", href: "#accueil" },
-    { name: "iPhones", href: "#iphones" },
-    { name: "Android", href: "#android" },
-    { name: "Ordinateurs", href: "#ordinateurs" },
-    { name: "Autres", href: "#autres" },
-    { name: "Contact", href: "#contact" },
+    { name: "Accueil", href: "/" },
+    { name: "iPhones", href: "/iphones" },
+    { name: "Android", href: "/android" },
+    { name: "Ordinateurs", href: "/ordinateurs" },
+    { name: "Autres", href: "/autres" },
+    { name: "Contact", href: "/contact" },
   ];
 
   return (
@@ -23,10 +23,8 @@ const Header = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center space-x-2">
-            <div className="bg-gradient-to-r from-orange-ci to-green-ci p-2 rounded-lg">
-              <Smartphone className="h-6 w-6 text-white" />
-            </div>
-            <span className="text-xl font-bold bg-gradient-to-r from-orange-ci to-green-ci bg-clip-text text-transparent">
+            <img src="/favicon.ico" alt="Logo JeTroc.ci" className="h-12 w-12 mr-5" />
+            <span className="text-xl font-bold text-black">
               JeTroc.ci
             </span>
           </div>
@@ -35,13 +33,13 @@ const Header = () => {
           <div className="hidden md:flex items-center space-x-8">
             <nav className="flex items-center space-x-8">
               {menuItems.map((item) => (
-                <a
+                <Link
                   key={item.name}
-                  href={item.href}
+                  to={item.href}
                   className="text-foreground hover:text-orange-ci transition-colors duration-300 font-medium"
                 >
                   {item.name}
-                </a>
+                </Link>
               ))}
             </nav>
 
@@ -89,14 +87,14 @@ const Header = () => {
           <div className="md:hidden border-t border-border/40 py-4 animate-in slide-in-from-top-2">
             <nav className="flex flex-col space-y-2">
               {menuItems.map((item) => (
-                <a
+                <Link
                   key={item.name}
-                  href={item.href}
+                  to={item.href}
                   className="text-foreground hover:text-orange-ci transition-colors duration-300 px-4 py-2 rounded-lg hover:bg-muted"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item.name}
-                </a>
+                </Link>
               ))}
             </nav>
           </div>

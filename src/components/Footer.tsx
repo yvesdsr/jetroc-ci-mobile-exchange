@@ -16,15 +16,13 @@ const Footer = () => {
             {/* Logo & Description */}
             <div className="space-y-4">
               <div className="flex items-center space-x-2">
-                <div className="bg-gradient-to-r from-orange-ci to-green-ci p-2 rounded-lg">
-                  <Smartphone className="h-6 w-6 text-white" />
-                </div>
-                <span className="text-xl font-bold bg-gradient-to-r from-orange-ci to-green-ci bg-clip-text text-transparent">
+                  <span className="text-xl font-bold flex items-center space-x-2">
+                  <img src="/favicon.ico" alt="Logo JeTroc.ci" className="h-14 w-14 mr-3" />
                   JeTroc.ci
-                </span>
+                  </span>
               </div>
               <p className="text-muted-foreground">
-                La première plateforme ivoirienne pour l'achat, la vente et le troc de téléphones.
+                La meilleure plateforme ivoirienne pour l'achat, la vente et le troc de téléphones.
               </p>
             </div>
 
@@ -83,7 +81,7 @@ const Footer = () => {
           </div>
 
           <div className="border-t border-border mt-8 pt-8 text-center text-muted-foreground">
-            <p>&copy; 2024 JeTroc.ci. Tous droits réservés.</p>
+            <p>&copy; 2025 JeTroc.ci. Tous droits réservés.</p>
           </div>
         </div>
       </footer>

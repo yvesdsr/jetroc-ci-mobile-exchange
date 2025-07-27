@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ShoppingCart, Repeat, DollarSign, Wrench } from "lucide-react";
-import heroImage from "@/assets/hero-phone.jpg";
+import heroImage from "@/assets/hero.jpg";  {/* Image finale après résolution du conflit */}
 import SellModal from "./modals/SellModal";
 import RepairModal from "./modals/RepairModal";
 
@@ -30,7 +30,7 @@ const Hero = () => {
               <span className="text-foreground">vos téléphones</span>
             </h1>
             <p className="text-xl text-muted-foreground max-w-lg mx-auto lg:mx-0">
-              La première plateforme ivoirienne dédiée à l'achat, la vente et le troc de téléphones. 
+              La meilleure plateforme ivoirienne dédiée à l'achat, la vente et le troc de téléphones. 
               Trouvez votre smartphone idéal ou donnez une seconde vie au vôtre.
             </p>
           </div>
@@ -102,7 +102,7 @@ const Hero = () => {
             <img 
               src={heroImage} 
               alt="Téléphones de qualité chez JeTroc.ci"
-              className="w-full h-auto max-w-lg mx-auto rounded-2xl shadow-2xl"
+              className="w-full h-auto max-w-xl mx-auto rounded-2xl shadow-2xl"
             />
           </div>
           {/* Decorative elements */}

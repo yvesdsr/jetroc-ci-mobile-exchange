@@ -1,6 +1,8 @@
 import { Phone, Mail, MessageCircle, MapPin, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Link } from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
 
 const Contact = () => {
   const openWhatsApp = (number: string) => {
@@ -9,12 +11,17 @@ const Contact = () => {
   };
 
   return (
+    
     <section id="contact" className="py-16 bg-muted/30">
+    <Link to="/" className="flex items-center text-orange-ci mb-4 hover:underline">
+  <ArrowLeft className="mr-2" />
+  Retour à l'accueil
+</Link>
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            <span className="bg-gradient-to-r from-orange-ci to-green-ci bg-clip-text text-transparent">
-              Contactez-nous
+            <span className="text-black">
+               Contactez-nous          
             </span>
           </h2>
           <p className="text-muted-foreground text-lg">
@@ -90,6 +97,7 @@ const Contact = () => {
           </Card>
         </div>
       </div>
+      
     </section>
   );
 };

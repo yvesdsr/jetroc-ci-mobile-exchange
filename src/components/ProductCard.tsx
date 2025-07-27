@@ -73,12 +73,12 @@ const ProductCard = ({
             </Button>
           </div>
 
-          {/* Category badge */}
-          <Badge 
+          {/* Category badge supprimé */}
+          {/* <Badge 
             className="absolute top-3 left-3 bg-background/80 backdrop-blur-sm text-foreground"
           >
             {category}
-          </Badge>
+          </Badge> */}
         </div>
 
         <CardContent className="p-4 space-y-3">
@@ -150,5 +150,4 @@ const ProductCard = ({
     </>
   );
 };
-
 export default ProductCard;

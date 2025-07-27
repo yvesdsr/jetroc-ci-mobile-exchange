@@ -274,12 +274,12 @@ const AdminDashboard = () => {
                         <SelectTrigger>
                           <SelectValue placeholder="Choisir une catégorie" />
                         </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="Smartphones">Smartphones</SelectItem>
-                          <SelectItem value="Ordinateurs">Ordinateurs</SelectItem>
-                          <SelectItem value="Tablettes">Tablettes</SelectItem>
-                          <SelectItem value="Accessoires">Accessoires</SelectItem>
-                        </SelectContent>
+                          <SelectContent>
+                            <SelectItem value="iPhones">iPhones</SelectItem>
+                            <SelectItem value="Android">Android</SelectItem>
+                            <SelectItem value="Ordinateurs">Ordinateurs</SelectItem>
+                            <SelectItem value="Autres">Autres</SelectItem>
+                          </SelectContent>
                       </Select>
                     </div>
                     <div>
