@@ -45,14 +45,14 @@ const AdminDashboard = () => {
     rating: '0'
   });
 
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
   // Redirect if not authenticated or not admin
   if (!user || !isAdmin) {
     return <Navigate to="/auth" replace />;
   }
-
-  useEffect(() => {
-    fetchProducts();
-  }, []);
 
   const fetchProducts = async () => {
     try {
