@@ -74,7 +74,7 @@ _Demande de réparation via JeTroc.ci_`;
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-md">
+      <DialogContent className="max-w-2xl w-full mx-4">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2 text-center">
             <Wrench className="h-5 w-5 text-green-ci" />
@@ -92,7 +92,7 @@ _Demande de réparation via JeTroc.ci_`;
               placeholder="Dites nous ce qu'il y a sur votre téléphone nous répondons à vos attentes au plus vite service ouvert 7jrs/7 et 24h/24 réparation dans un délai très rapide."
               value={formData.description}
               onChange={(e) => handleInputChange('description', e.target.value)}
-              className="min-h-[100px]"
+              className="min-h-[150px] w-full resize-none"
               required
             />
           </div>
@@ -104,6 +104,7 @@ _Demande de réparation via JeTroc.ci_`;
               placeholder="Ex: 0586905549"
               value={formData.phoneNumber}
               onChange={(e) => handleInputChange('phoneNumber', e.target.value)}
+              className="w-full"
               required
             />
           </div>
