@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -33,6 +33,7 @@ const AdminDashboard = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const { user, isAdmin, signOut } = useAuth();
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   // Form state
   const [formData, setFormData] = useState({
@@ -49,8 +50,11 @@ const AdminDashboard = () => {
     fetchProducts();
   }, []);
 
+  console.log('AdminDashboard render - user:', user?.id, 'isAdmin:', isAdmin);
+
   // Redirect if not authenticated or not admin
   if (!user || !isAdmin) {
+    console.log('Redirecting to auth - user:', !!user, 'isAdmin:', isAdmin);
     return <Navigate to="/auth" replace />;
   }
 
@@ -185,6 +189,17 @@ const AdminDashboard = () => {
     }
   };
 
+  const handleSignOut = async () => {
+    console.log('HandleSignOut called');
+    try {
+      await signOut();
+      console.log('SignOut completed, navigating to home');
+      navigate('/', { replace: true });
+    } catch (error) {
+      console.error('Error during sign out:', error);
+    }
+  };
+
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat('fr-FR', {
       style: 'currency',
@@ -197,7 +212,7 @@ const AdminDashboard = () => {
       <div className="container mx-auto p-6">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-3xl font-bold">Dashboard Administrateur</h1>
-          <Button onClick={signOut} variant="outline">
+          <Button onClick={handleSignOut} variant="outline">
             <LogOut className="mr-2 h-4 w-4" />
             Déconnexion
           </Button>
