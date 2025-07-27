@@ -12,6 +12,7 @@ import { useToast } from '@/hooks/use-toast';
 import { useAuth } from '@/contexts/AuthContext';
 import { supabase } from '@/integrations/supabase/client';
 import { Plus, Edit, Trash2, LogOut } from 'lucide-react';
+import { ImageUpload } from '@/components/ui/image-upload';
 
 interface Product {
   id: string;
@@ -248,15 +249,10 @@ const AdminDashboard = () => {
                         required
                       />
                     </div>
-                    <div>
-                      <Label htmlFor="image_url">URL de l'image</Label>
-                      <Input
-                        id="image_url"
-                        value={formData.image_url}
-                        onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
-                        placeholder="/placeholder.svg"
-                      />
-                    </div>
+                    <ImageUpload
+                      currentImageUrl={formData.image_url}
+                      onImageUploaded={(imageUrl) => setFormData({ ...formData, image_url: imageUrl })}
+                    />
                     <div>
                       <Label htmlFor="category">Catégorie *</Label>
                       <Select value={formData.category} onValueChange={(value) => setFormData({ ...formData, category: value })}>
