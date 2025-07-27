@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, ShoppingCart, Repeat, DollarSign } from "lucide-react";
+import { ArrowRight, ShoppingCart, Repeat, DollarSign, Wrench } from "lucide-react";
 import heroImage from "@/assets/hero-phone.jpg";
 import SellModal from "./modals/SellModal";
+import RepairModal from "./modals/RepairModal";
 
 const Hero = () => {
   const [isSellModalOpen, setIsSellModalOpen] = useState(false);
+  const [isRepairModalOpen, setIsRepairModalOpen] = useState(false);
   
   const scrollToProducts = () => {
     document.getElementById('produits')?.scrollIntoView({ behavior: 'smooth' });
@@ -55,15 +57,26 @@ const Hero = () => {
                 Faire un troc
               </Button>
             </div>
-            <Button 
-              variant="outline" 
-              size="lg"
-              className="border-2 border-orange-ci text-orange-ci hover:bg-orange-ci hover:text-white transition-all duration-300 w-fit mx-auto lg:mx-0"
-              onClick={() => setIsSellModalOpen(true)}
-            >
-              <DollarSign className="mr-2 h-5 w-5" />
-              Vendre mon téléphone
-            </Button>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Button 
+                variant="outline" 
+                size="lg"
+                className="border-2 border-orange-ci text-orange-ci hover:bg-orange-ci hover:text-white transition-all duration-300"
+                onClick={() => setIsSellModalOpen(true)}
+              >
+                <DollarSign className="mr-2 h-5 w-5" />
+                Vendre mon téléphone
+              </Button>
+              <Button 
+                variant="outline" 
+                size="lg"
+                className="border-2 border-green-ci text-green-ci hover:bg-green-ci hover:text-white transition-all duration-300"
+                onClick={() => setIsRepairModalOpen(true)}
+              >
+                <Wrench className="mr-2 h-5 w-5" />
+                Réparer votre téléphone
+              </Button>
+            </div>
           </div>
 
           {/* Stats */}
@@ -101,6 +114,10 @@ const Hero = () => {
       <SellModal 
         isOpen={isSellModalOpen}
         onClose={() => setIsSellModalOpen(false)}
+      />
+      <RepairModal 
+        isOpen={isRepairModalOpen}
+        onClose={() => setIsRepairModalOpen(false)}
       />
     </section>
   );
