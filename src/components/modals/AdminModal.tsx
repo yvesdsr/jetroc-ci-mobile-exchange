@@ -21,16 +21,16 @@ const AdminModal = ({ isOpen, onClose }: AdminModalProps) => {
     e.preventDefault();
     setIsLoading(true);
 
-    // Simulate login process
-    setTimeout(() => {
+    try {
+      // Simulate admin verification
       if (username === "yvesdsr" && password === "Celestinviviane2001") {
         toast({
           title: "Connexion réussie",
           description: "Bienvenue dans l'espace administrateur",
         });
         onClose();
-        // TODO: Redirect to admin dashboard
-        console.log("Admin logged in successfully");
+        // Redirect to admin dashboard
+        window.location.href = "/admin";
       } else {
         toast({
           title: "Erreur de connexion",
@@ -38,8 +38,15 @@ const AdminModal = ({ isOpen, onClose }: AdminModalProps) => {
           variant: "destructive",
         });
       }
+    } catch (error) {
+      toast({
+        title: "Erreur de connexion",
+        description: "Une erreur s'est produite lors de la connexion",
+        variant: "destructive",
+      });
+    } finally {
       setIsLoading(false);
-    }, 1000);
+    }
   };
 
   return (
