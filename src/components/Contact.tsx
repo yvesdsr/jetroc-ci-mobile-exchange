@@ -1,27 +1,36 @@
 import { Phone, Mail, MessageCircle, MapPin, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 
-const Contact = () => {
+interface ContactProps {
+  showBackButton?: boolean;
+}
+
+const Contact = ({ showBackButton = false }: ContactProps) => {
+  const location = useLocation();
+  const isContactPage = location.pathname === '/contact';
+  
   const openWhatsApp = (number: string) => {
     const message = "Bonjour JeTroc.ci, j'aimerais avoir plus d'informations sur vos services.";
     window.open(`https://wa.me/225${number.replace(/\s/g, '')}?text=${encodeURIComponent(message)}`, '_blank');
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className={isContactPage ? "min-h-screen bg-background" : ""}>
       <div className="container mx-auto px-4 py-8 max-w-7xl">
-        <div className="flex items-center justify-between mb-8">
-          <Link 
-            to="/" 
-            className="flex items-center text-orange-ci hover:text-orange-light transition-colors duration-300 font-medium"
-          >
-            <ArrowLeft className="mr-2 h-5 w-5" />
-            Retour à l'accueil
-          </Link>
-        </div>
+        {isContactPage && (
+          <div className="flex items-center justify-between mb-8">
+            <Link 
+              to="/" 
+              className="flex items-center text-orange-ci hover:text-orange-light transition-colors duration-300 font-medium"
+            >
+              <ArrowLeft className="mr-2 h-5 w-5" />
+              Retour à l'accueil
+            </Link>
+          </div>
+        )}
 
         <section id="contact" className="py-8">
           <div className="container mx-auto px-4 max-w-6xl">
