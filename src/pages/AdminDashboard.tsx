@@ -229,95 +229,98 @@ const AdminDashboard = () => {
                     Ajouter un produit
                   </Button>
                 </DialogTrigger>
-                <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
-                  <DialogHeader>
+                <DialogContent className="w-[95vw] max-w-md max-h-[95vh] overflow-hidden flex flex-col">
+                  <DialogHeader className="flex-shrink-0">
                     <DialogTitle>
                       {editingProduct ? 'Modifier le produit' : 'Ajouter un produit'}
                     </DialogTitle>
                   </DialogHeader>
-                  <form onSubmit={handleSubmit} className="space-y-4">
-                    <div>
-                      <Label htmlFor="name">Nom *</Label>
-                      <Input
-                        id="name"
-                        value={formData.name}
-                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        required
+                  <div className="flex-1 overflow-y-auto px-1">
+                    <form onSubmit={handleSubmit} className="space-y-3">
+                      <div>
+                        <Label htmlFor="name">Nom *</Label>
+                        <Input
+                          id="name"
+                          value={formData.name}
+                          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                          required
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="description">Description</Label>
+                        <Textarea
+                          id="description"
+                          value={formData.description}
+                          onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                          rows={2}
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="price">Prix (XOF) *</Label>
+                        <Input
+                          id="price"
+                          type="number"
+                          step="0.01"
+                          value={formData.price}
+                          onChange={(e) => setFormData({ ...formData, price: e.target.value })}
+                          required
+                        />
+                      </div>
+                      <ImageUpload
+                        currentImageUrl={formData.image_url}
+                        onImageUploaded={(imageUrl) => setFormData({ ...formData, image_url: imageUrl })}
                       />
-                    </div>
-                    <div>
-                      <Label htmlFor="description">Description</Label>
-                      <Textarea
-                        id="description"
-                        value={formData.description}
-                        onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                      />
-                    </div>
-                    <div>
-                      <Label htmlFor="price">Prix (XOF) *</Label>
-                      <Input
-                        id="price"
-                        type="number"
-                        step="0.01"
-                        value={formData.price}
-                        onChange={(e) => setFormData({ ...formData, price: e.target.value })}
-                        required
-                      />
-                    </div>
-                    <ImageUpload
-                      currentImageUrl={formData.image_url}
-                      onImageUploaded={(imageUrl) => setFormData({ ...formData, image_url: imageUrl })}
-                    />
-                    <div>
-                      <Label htmlFor="category">Catégorie *</Label>
-                      <Select value={formData.category} onValueChange={(value) => setFormData({ ...formData, category: value })}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Choisir une catégorie" />
-                        </SelectTrigger>
+                      <div>
+                        <Label htmlFor="category">Catégorie *</Label>
+                        <Select value={formData.category} onValueChange={(value) => setFormData({ ...formData, category: value })}>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Choisir une catégorie" />
+                          </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="iPhones">iPhones</SelectItem>
+                              <SelectItem value="Android">Android</SelectItem>
+                              <SelectItem value="Ordinateurs">Ordinateurs</SelectItem>
+                              <SelectItem value="Autres">Autres</SelectItem>
+                            </SelectContent>
+                        </Select>
+                      </div>
+                      <div>
+                        <Label htmlFor="condition">État *</Label>
+                        <Select value={formData.condition} onValueChange={(value) => setFormData({ ...formData, condition: value })}>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Choisir un état" />
+                          </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="iPhones">iPhones</SelectItem>
-                            <SelectItem value="Android">Android</SelectItem>
-                            <SelectItem value="Ordinateurs">Ordinateurs</SelectItem>
-                            <SelectItem value="Autres">Autres</SelectItem>
+                            <SelectItem value="Comme neuf">Comme neuf</SelectItem>
+                            <SelectItem value="Excellent">Excellent</SelectItem>
+                            <SelectItem value="Très bon">Très bon</SelectItem>
+                            <SelectItem value="Bon">Bon</SelectItem>
+                            <SelectItem value="Correct">Correct</SelectItem>
                           </SelectContent>
-                      </Select>
-                    </div>
-                    <div>
-                      <Label htmlFor="condition">État *</Label>
-                      <Select value={formData.condition} onValueChange={(value) => setFormData({ ...formData, condition: value })}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Choisir un état" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="Comme neuf">Comme neuf</SelectItem>
-                          <SelectItem value="Excellent">Excellent</SelectItem>
-                          <SelectItem value="Très bon">Très bon</SelectItem>
-                          <SelectItem value="Bon">Bon</SelectItem>
-                          <SelectItem value="Correct">Correct</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    <div>
-                      <Label htmlFor="rating">Note (0-5)</Label>
-                      <Input
-                        id="rating"
-                        type="number"
-                        min="0"
-                        max="5"
-                        step="0.1"
-                        value={formData.rating}
-                        onChange={(e) => setFormData({ ...formData, rating: e.target.value })}
-                      />
-                    </div>
-                    <div className="flex gap-2">
-                      <Button type="submit" className="flex-1">
-                        {editingProduct ? 'Modifier' : 'Ajouter'}
-                      </Button>
-                      <Button type="button" variant="outline" onClick={() => setIsDialogOpen(false)}>
-                        Annuler
-                      </Button>
-                    </div>
-                  </form>
+                        </Select>
+                      </div>
+                      <div>
+                        <Label htmlFor="rating">Note (0-5)</Label>
+                        <Input
+                          id="rating"
+                          type="number"
+                          min="0"
+                          max="5"
+                          step="0.1"
+                          value={formData.rating}
+                          onChange={(e) => setFormData({ ...formData, rating: e.target.value })}
+                        />
+                      </div>
+                      <div className="flex gap-2 pt-2 sticky bottom-0 bg-background border-t mt-4 pt-4">
+                        <Button type="submit" className="flex-1">
+                          {editingProduct ? 'Modifier' : 'Ajouter'}
+                        </Button>
+                        <Button type="button" variant="outline" onClick={() => setIsDialogOpen(false)}>
+                          Annuler
+                        </Button>
+                      </div>
+                    </form>
+                  </div>
                 </DialogContent>
               </Dialog>
             </div>
